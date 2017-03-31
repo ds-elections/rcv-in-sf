@@ -1,3 +1,7 @@
-rcv in sf
+##Ranked Choice Voting: San Francisco
 
-matthew yancheff
+**Contributors**
+
+Jay Lee
+
+Matthew Yancheff
