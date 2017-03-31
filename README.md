@@ -8,4 +8,4 @@ Mia Leung
 
 Matthew Yancheff
 
-this is so unfair #sad! 
+ranked choice voting rules 
