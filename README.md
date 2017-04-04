@@ -8,6 +8,8 @@ Mia Leung
 
 Matthew Yancheff
 
-ranked choice voting rules 
+Profs. Andrew Bray & Paul Gronke, Case Studies: Statistical Analysis
 
 TODO: Abstract, Project Timeline
+
+Meeting: Wednesday 4/3 at regular class time, ETC lobby  
