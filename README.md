@@ -8,7 +8,7 @@ Mia Leung
 
 Matthew Yancheff
 
-ranked choice voting rules 
+Profs. Andrew Bray & Paul Gronke, Case Studies: Statistical Analysis
 
 TODO: Abstract, Project Timeline
 
