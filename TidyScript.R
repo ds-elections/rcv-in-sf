@@ -30,8 +30,11 @@ MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
                  "is_writein",
                  "is_provisional"),
            sep = c(10,17,67,74,81,82)) %>%
-  mutate(is_writein = as.integer(is_writein),
+  mutate(record_type = trimws(record_type),
+         description = trimws(description),
+         is_writein = as.integer(is_writein),
          is_provisional = as.integer(is_provisional))
 
 # Next step is to link/replace precinct_id with the name of the precinct,
 # candidate_id with the name of the candidate, etc.
+# Maybe some kind of join?
