@@ -1,4 +1,5 @@
 library(tidyverse)
+library(forcats)
 BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
   separate(X1, c("contest_id",
                  "pref_voter_id",
@@ -9,7 +10,16 @@ BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
                  "candidate_id",
                  "over_vote",
                  "under_vote"),
-           sep = c(7,16,23,26,33,36,43,44))
+           sep = c(7,16,23,26,33,36,43,44)) %>%
+  mutate(vote_rank = factor(vote_rank,
+                            ordered = T,
+                            levels = c("001","002","003")),
+         vote_rank = fct_recode(vote_rank,
+                                "1" = "001",
+                                "2" = "002",
+                                "3" = "003"),
+         over_vote = as.integer(over_vote),
+         under_vote = as.integer(under_vote))
 
 MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
   separate(X1, c("record_type",
@@ -19,5 +29,9 @@ MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
                  "candidates_contest_id",
                  "is_writein",
                  "is_provisional"),
-           sep = c(10,17,67,74,81,82))
+           sep = c(10,17,67,74,81,82)) %>%
+  mutate(is_writein = as.integer(is_writein),
+         is_provisional = as.integer(is_provisional))
 
+# Next step is to link/replace precinct_id with the name of the precinct,
+# candidate_id with the name of the candidate, etc.
