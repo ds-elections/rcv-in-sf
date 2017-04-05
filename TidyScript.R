@@ -19,7 +19,8 @@ BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
                                 "2" = "002",
                                 "3" = "003"),
          over_vote = as.integer(over_vote),
-         under_vote = as.integer(under_vote))
+         under_vote = as.integer(under_vote)) %>%
+  group_by(pref_voter_id, contest_id)
 
 MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
   separate(X1, c("record_type",
@@ -34,7 +35,19 @@ MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
          description = trimws(description),
          is_writein = as.integer(is_writein),
          is_provisional = as.integer(is_provisional))
+Candidates <- MasterLookup %>%
+  filter(record_type == "Candidate") %>%
+  select(id, description)
+Contests <- MasterLookup %>%
+  filter(record_type == "Contest") %>%
+  select(id, description)
+Precincts <- MasterLookup %>%
+  filter(record_type == "Precinct") %>%
+  select(id, description)
+Tallies <- MasterLookup %>%
+  filter(record_type == "Tally Type") %>%
+  select(id, description)
 
 # Next step is to link/replace precinct_id with the name of the precinct,
 # candidate_id with the name of the candidate, etc.
-# Maybe some kind of join?
+# Maybe some kind of join? 
