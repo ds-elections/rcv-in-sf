@@ -48,12 +48,8 @@ Candidates <- MasterLookup %>%
   rename(candidate = description)
 Contests <- MasterLookup %>%
   filter(record_type == "Contest") %>%
-<<<<<<< HEAD
-  select(id, description)a
-=======
   select(id, description) %>%
   rename(contest = description)
->>>>>>> b5d309b1855006d6eecafa0b03711ede1a93e995
 Precincts <- MasterLookup %>%
   filter(record_type == "Precinct") %>%
   select(id, description) %>%
