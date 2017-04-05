@@ -62,6 +62,5 @@ BallotImage <- left_join(BallotImage, Tallies, by = c("tally_type_id" = "id"))
 FinalImage <- BallotImage %>%
   select(pref_voter_id, contest, vote_rank, candidate, precinct) %>%
   spread(key = vote_rank, value = candidate)
-# Next step is to link/replace precinct_id with the name of the precinct,
-# candidate_id with the name of the candidate, etc.
-# Maybe some kind of join? 
+
+# FinalImage is the nice file. We can just run means on it to calculate results.
