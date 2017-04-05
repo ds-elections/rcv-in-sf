@@ -6,7 +6,7 @@ BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
   separate(X1, c("contest_id",
                  "pref_voter_id",
                  "serial_number",
-                 "tally_type_id",
+                 "tally_type_id", 
                  "precinct_id",
                  "vote_rank",
                  "candidate_id",
@@ -36,8 +36,9 @@ MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
          description = trimws(description),
          is_writein = as.integer(is_writein),
          is_provisional = as.integer(is_provisional))
+ 
 
-# Next step is to link/replace precinct_id with the name of the precinct,
-# candidate_id with the name of the candidate, etc.
-# Maybe some kind of join?
+select(filter(MasterLookup, record_type == "Precinct")) %>% 
+left_join(BallotImage, by = c("precinct_id")
+
 ```
