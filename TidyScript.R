@@ -1,3 +1,9 @@
+# Data comes from the 2016 San Francisco Board of Supervisors elections,
+# publicly available at http://www.sfelections.org/results/20161108/#english_detail
+
+# Instructions for separating the ballot image data come from
+# http://www.sfelections.org/results/20161108/data/BallotImageRCVhelp.pdf
+
 library(tidyverse)
 library(forcats)
 BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
