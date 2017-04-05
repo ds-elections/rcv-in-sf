@@ -6,7 +6,7 @@ BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
   separate(X1, c("contest_id",
                  "pref_voter_id",
                  "serial_number",
-                 "tally_type_id", 
+                 "tally_type_id",
                  "precinct_id",
                  "vote_rank",
                  "candidate_id",
@@ -21,7 +21,8 @@ BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
                                 "2" = "002",
                                 "3" = "003"),
          over_vote = as.integer(over_vote),
-         under_vote = as.integer(under_vote))
+         under_vote = as.integer(under_vote)) %>%
+  group_by(pref_voter_id, contest_id)
 
 MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
   separate(X1, c("record_type",
@@ -36,9 +37,19 @@ MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
          description = trimws(description),
          is_writein = as.integer(is_writein),
          is_provisional = as.integer(is_provisional))
- 
+Candidates <- MasterLookup %>%
+  filter(record_type == "Candidate") %>%
+  select(id, description)
+Contests <- MasterLookup %>%
+  filter(record_type == "Contest") %>%
+  select(id, description)a
+Precincts <- MasterLookup %>%
+  filter(record_type == "Precinct") %>%
+  select(id, description)
+Tallies <- MasterLookup %>%
+  filter(record_type == "Tally Type") %>%
+  select(id, description)
 
-select(filter(MasterLookup, record_type == "Precinct")) %>% 
-left_join(BallotImage, by = c("precinct_id")
+Edited_Precinct<- Precincts %>% left_join(BallotImage, by = "precinct_id")
 
 ```
