@@ -40,7 +40,7 @@ Candidates <- MasterLookup %>%
   select(id, description)
 Contests <- MasterLookup %>%
   filter(record_type == "Contest") %>%
-  select(id, description)
+  select(id, description)a
 Precincts <- MasterLookup %>%
   filter(record_type == "Precinct") %>%
   select(id, description)
