@@ -10,6 +10,4 @@ Matthew Yancheff
 
 Profs. Andrew Bray & Paul Gronke, Case Studies: Statistical Analysis
 
-TODO: Abstract, Project Timeline
-
-Meeting: Wednesday 4/3 at regular class time, ETC lobby  
+Meeting: Friday 4/7 3pm Andrew's office
