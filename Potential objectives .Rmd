@@ -7,7 +7,7 @@ a. Can you reproduce the election results? Consider the difference in threshold 
   -Shiny app for sliding totals over time
 
 2. Visualize. Different levels of complexity by area? income? which city you're in? Number of candidates? campaign spending?
-  -Maybe map visualizations? Slider's would be cool here, but perhaps a little ambitious  
+  -Maybe map visualizations? Sliders would be cool here, but perhaps a little ambitious  
 
 
 Things to consider: what predicts future runs by candidates? Their initial amount of votes? Their initial ranking? Their final ranking? Focused support among one group or area?
