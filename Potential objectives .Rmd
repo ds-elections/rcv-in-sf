@@ -15,3 +15,5 @@ Things to consider: what predicts future runs by candidates? Their initial amoun
 
 See if Condorcet winner matches the RCV winner. Other types of elections also?
 -See the paper (posted on 4/7) in the Slack thread 
+
+Quantifying influences 
