@@ -1,3 +1,5 @@
+library(tidyverse)
+
 UsefulImage <- BallotImage %>%
   select(pref_voter_id, contest, vote_rank, candidate, precinct)
 
@@ -41,10 +43,16 @@ for (i in 0:a) {
       rbind(get(paste0("loser", i))))
   assign(
     paste0("round", i+1),
-    right_join(get(paste0("round", i+1)),
-               get(paste0("round", i)),
+    left_join(get(paste0("round", i)),
+               get(paste0("round", i+1)),
                by = "candidate"))
 }
-get(paste0("round", a + 1))
+results <- get(paste0("round", a + 1))
+results <- results[order(rowSums(is.na(results))), ]
+results <- results %>%
+  arrange(is.na(candidate))
 
+View(results)
+  
+# Results are saved, and able to view
 # need to fix colnames and remove NA proportions, as well as mutate to get transfer numbers
