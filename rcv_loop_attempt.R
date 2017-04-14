@@ -1,11 +1,14 @@
 UsefulImage <- BallotImage %>%
   select(pref_voter_id, contest, vote_rank, candidate, precinct)
 
-for (i in c(1, 3, 5, 7, 9, 11)) {
-  assign(paste0("District", i),
+for (j in c(1, 3, 5, 7, 9, 11)) {
+  assign(paste0("District", j),
          UsefulImage %>%
-           filter(contest == paste("Board of Supervisors, District", i, sep = " ")))
+           filter(contest == paste("Board of Supervisors, District", j, sep = " ")))
 }
+
+# Could do another loop here to get data on every district, w/ something like:
+# paste("round", j, i, sep = ".") and above for loop
 
 round0 <- data.frame(unique(District1$candidate))
 colnames(round0) <- c("candidate")
@@ -43,3 +46,5 @@ for (i in 0:a) {
                by = "candidate"))
 }
 get(paste0("round", a + 1))
+
+# need to fix colnames and remove NA proportions, as well as mutate to get transfer numbers
