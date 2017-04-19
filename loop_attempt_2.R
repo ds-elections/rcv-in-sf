@@ -50,9 +50,11 @@ for (i in 0:a) {
 assign(paste0("District", j, "Results"), get(paste("round", a+1, j, sep = ".")))
 assign(paste0("District", j, "Results"), get(paste0("District", j, "Results"))[order(rowSums(is.na(get(paste0("District", j, "Results"))))), ])
 assign(paste0("District", j, "Results"), get(paste0("District", j, "Results")) %>%
-  arrange(is.na(candidate), desc(total)))
+  arrange(is.na(candidate)))
 }
 
+rm(list = ls(pattern = "^loser"))
+rm(list = ls(pattern = "^round"))
 
 # Results are saved, and able to view
 # need to fix colnames and remove NA proportions, as well as mutate to get transfer numbers
