@@ -1,5 +1,3 @@
-library(tidyverse)
-
 UsefulImage <- BallotImage %>%
   select(pref_voter_id, contest, vote_rank, candidate, precinct)
 
