@@ -9,15 +9,13 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Raw Data
+---
 
-```{r ballot image, echo = TRUE}
+![](BallotImage.png)
 
-```
+---
 
-## Slide with Plot
+![](MasterLookup.png)
 
-```{r pressure}
-plot(pressure)
-```
+---
 
