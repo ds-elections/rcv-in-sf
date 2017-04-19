@@ -1,0 +1,23 @@
+---
+title: "RCV Visualizations"
+author: "Jay Lee"
+date: "4/19/2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Raw Data
+
+```{r ballot image, echo = TRUE}
+
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+

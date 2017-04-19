@@ -11,6 +11,7 @@ data <- BallotImage %>%
             serial_number = unique(serial_number))
 
 PrecinctData <- data %>%
+  filter(!(contest %in% "Board of Supervisors, District"))
   group_by(precinct) %>%
   summarise(p_over = mean(over),
             p_under = mean(under),
