@@ -1,10 +1,12 @@
 
 
-```{r setup, include=FALSE}
+```{r setup}
 # Need to install networkD3 package to run
+# Also none of this is reproducable at the moment
 library(tidyverse)
 library(networkD3)
 ```
+
 
 ```{r}
 source <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3)
@@ -16,7 +18,7 @@ sankey_d1_nodes <- data.frame(name)
 ```
 
 
-```{r pressure, echo=FALSE}
+```{r}
 sankeyNetwork(Links = sankey_d1_values, Nodes = sankey_d1_nodes, Source = "source", Target = "target", Value = "value", NodeID = "name", units = "voters", fontSize = 12, nodeWidth = 20)
 ```
 
