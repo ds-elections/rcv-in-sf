@@ -11,15 +11,26 @@ data <- BallotImage %>%
             serial_number = unique(serial_number))
 
 PrecinctData <- data %>%
-  filter(!(contest %in% "Board of Supervisors, District"))
   group_by(precinct) %>%
   summarise(p_over = mean(over),
             p_under = mean(under),
             contest = unique(contest))
 
 ggplot(PrecinctData, aes(x = p_over, y = p_under, col = contest)) +
+  geom_point()
+
+SmallerData <- data %>%
+  filter(!(contest %in% c("Board of Supervisors, District 3",
+                          "Board of Supervisors, District 5"))) %>%
+  group_by(precinct) %>%
+  summarise(p_over = mean(over),
+            p_under = mean(under),
+            contest = unique(contest))
+
+ggplot(SmallerData, aes(x = p_over, y = p_under, col = contest)) +
   geom_point() +
   geom_smooth(method = lm, se = F, aes(col = contest))
+
 
 
 
