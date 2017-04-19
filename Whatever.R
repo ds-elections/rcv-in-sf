@@ -17,7 +17,8 @@ PrecinctData <- data %>%
             contest = unique(contest))
 
 ggplot(PrecinctData, aes(x = p_over, y = p_under, col = contest)) +
-  geom_point()
+  geom_point() +
+  geom_smooth(method = lm, se = F, aes(col = contest))
 
 
 
