@@ -2,7 +2,7 @@
 
 ```{r setup}
 # Need to install networkD3 package to run
-# Also none of this is reproducable at the moment
+# Also none of this is reproducible at the moment
 library(tidyverse)
 library(networkD3)
 ```
