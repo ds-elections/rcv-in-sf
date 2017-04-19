@@ -155,4 +155,4 @@ ggplot(SmallerData, aes(x = p_over, y = p_under, col = contest)) +
 
 ---
 
-![San Francisco Board of Supervisors District Map](SF.png)
+![](SF.png)
