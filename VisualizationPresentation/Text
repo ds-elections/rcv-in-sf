@@ -18,4 +18,16 @@ Slide 5: Tidied Data Set
 
 Side 6: Totalling the votes
 -[Code explaination here]
--For each round, the candidate with the least votes was e
+-For each round, the candidate with the least votes was eliminated and had their votes transferred until there was only one candidate left. 
+
+Slide 7: "Snakey" Visualization
+-An interactive visualization that traces the transferring of votes through the rounds for each candidate.
+
+Slide 8: Under and Over Voting
+-The proportion of under and over voting for each candidate in each district. 
+-District 3 had an unexpected amount of undervoting, possibly becuase only one candidate was running. 
+
+Slide 9: Under and Over Voting Adjusted
+-Slide 8 visualization was adjusted with the removal of outlying districts and regression lines were drawn.
+
+Slide 10: Map of San Francisco Districts 
