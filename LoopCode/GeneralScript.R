@@ -1,12 +1,7 @@
-# Data comes from the 2016 San Francisco Board of Supervisors elections,
-# publicly available at http://www.sfelections.org/results/20161108/#english_detail
-
-# Instructions for separating the ballot image data come from
-# http://www.sfelections.org/results/20161108/data/BallotImageRCVhelp.pdf
-
+# Works in the case of "California style" ballot images
 library(tidyverse)
 library(forcats)
-BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
+BallotImage <- read_tsv("http://www.acgov.org/rov/rcv/results/230/BerkeleyMayor/ballot_image.txt", col_names = F) %>%
   separate(X1, c("contest_id",
                  "pref_voter_id",
                  "serial_number",
@@ -28,7 +23,7 @@ BallotImage <- read_tsv("data/20161206_ballotimage.txt", col_names = F) %>%
          over_vote = as.integer(over_vote),
          under_vote = as.integer(under_vote))
 
-MasterLookup <- read_tsv("data/20161206_masterlookup.txt", col_names = F) %>%
+MasterLookup <- read_tsv("http://www.acgov.org/rov/rcv/results/230/BerkeleyMayor/master_lookup.txt", col_names = F) %>%
   separate(X1, c("record_type",
                  "id",
                  "description",
@@ -74,53 +69,49 @@ FinalImage <- BallotImage %>%
 UsefulImage <- BallotImage %>%
   select(pref_voter_id, contest, vote_rank, candidate, precinct)
 
-for (j in c(1, 3, 5, 7, 9, 11)) {
-  assign(paste0("District", j),
+for (j in unique(BallotImage$contest)) {
+  assign(paste0("Election: ", j),
          UsefulImage %>%
-           filter(contest == paste("Board of Supervisors, District", j, sep = " ")))
+           filter(contest == j))
   
+  assign("round0", data.frame(unique(get(paste0("Election: ", j))[ ,4])))
+  assign(colnames(round0), c("candidate"))
+  assign("loser0", data.frame(candidate = character()))
   
-  # Could do another loop here to get data on every district, w/ something like:
-  # paste("round", i, j, sep = ".") and above for loop
-  
-  assign(paste("round", "0", j, sep = "."), data.frame(unique(get(paste0("District", j))[ ,4])))
-  assign(colnames(get(paste("round", "0", j, sep = "."))), c("candidate"))
-  assign(paste("loser", "0", j, sep = "."), data.frame(candidate = character()))
-  
-  a <- (nrow(get(paste("round", "0", j, sep = "."))) - 3)
+  a <- (nrow(round0) - 3)
   for (i in 0:a) {
     assign(
-      paste("round", i+1, j, sep = "."),
-      get(paste0("District", j)) %>%
-        filter(!(candidate %in% get(paste("loser", i, j, sep = "."))[['candidate']])) %>%
+      paste0("round", i+1),
+      get(paste0("Election: ", j)) %>%
+        filter(!(candidate %in% get(paste0("loser", i)[['candidate']]))) %>%
         group_by(pref_voter_id) %>%
         filter(vote_rank == min(vote_rank)) %>%
         ungroup() %>%
         group_by(candidate) %>%
         summarise(total = n()) %>%
         arrange(desc(total)))
-    b <- get(paste("round", i+1, j, sep = ".")) %>% filter(!is.na(candidate))
-    assign(paste("round", i+1, j, sep = "."),
+    b <- get(paste0("round", i+1)) %>% filter(!is.na(candidate))
+    assign(paste0("round", i+1),
            mutate(
-             get(paste("round", i+1, j, sep = ".")),
+             get(paste0("round", i+1)),
              prop = total/sum(b$total)))
     assign(
-      paste("loser", i+1, j, sep = "."),
-      get(paste("round", i+1, j, sep = ".")) %>%
+      paste0("loser", i+1),
+      get(paste0("round", i+1)) %>%
         arrange(total) %>%
         filter(!is.na(candidate)) %>%
         head(n = 1) %>%
         select(candidate) %>%
-        rbind(get(paste("loser", i, j, sep = "."))))
+        rbind(get(paste0("loser", i))))
     assign(
-      paste("round", i+1, j, sep = "."),
-      left_join(get(paste("round", i, j, sep = ".")),
-                get(paste("round", i+1, j, sep = ".")),
+      paste0("round", i+1),
+      left_join(get(paste0("round", i)),
+                get(paste0("round", i+1)),
                 by = "candidate"))
   }
-  assign(paste0("District", j, "Results"), get(paste("round", a+1, j, sep = ".")))
-  assign(paste0("District", j, "Results"), get(paste0("District", j, "Results"))[order(rowSums(is.na(get(paste0("District", j, "Results"))))), ])
-  assign(paste0("District", j, "Results"), get(paste0("District", j, "Results")) %>%
+  assign(paste0("Election: ", j, " (Results)"), get(paste0("round", a+1)))
+  assign(paste0("Election: ", j, " (Results)"), get(paste0("Election: ", j, " (Results)"))[order(rowSums(is.na(get(paste0("Election: ", j, " (Results)"))))), ])
+  assign(paste0("Election: ", j, " (Results)"), get(paste0("Election: ", j, " (Results)")) %>%
            arrange(is.na(candidate)))
 }
 
