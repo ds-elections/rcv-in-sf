@@ -1,5 +1,5 @@
 library(tidyverse)
-set1 <- read_csv("/Users/mialeung/Dropbox/*Reed/Spring 2017/MATH 241:POL 341/rcv-in-sf/Census/ACS_15_5YR_S1902.xls")
+set1 <- read_csv("/Users/mialeung/Dropbox/*Reed/Spring 2017/MATH 241:POL 341/rcv-in-sf/Census/ACS_15_5YR_S1902.csv")
 set2 <- read_csv("/Users/mialeung/Dropbox/*Reed/Spring 2017/MATH 241:POL 341/rcv-in-sf/Census/ACS_15_5YR_S1902_1.xls")
 set3 <- read_csv("/Users/mialeung/Dropbox/*Reed/Spring 2017/MATH 241:POL 341/rcv-in-sf/Census/ACS_15_5YR_S1902_2.xls")
 set4 <- read_csv("/Users/mialeung/Dropbox/*Reed/Spring 2017/MATH 241:POL 341/rcv-in-sf/Census/ACS_15_5YR_S1902_3.xls")
