@@ -83,7 +83,7 @@ for (j in unique(BallotImage$contest)) {
     assign(
       paste0("round", i+1),
       get(paste0("Election: ", j)) %>%
-        filter(!(candidate %in% get(paste0("loser", i)[['candidate']]))) %>%
+        filter(!(candidate %in% get(paste0("loser", i))[['candidate']])) %>%
         group_by(pref_voter_id) %>%
         filter(vote_rank == min(vote_rank)) %>%
         ungroup() %>%
