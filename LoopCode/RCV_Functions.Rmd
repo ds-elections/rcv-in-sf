@@ -163,8 +163,8 @@ for (j in 2:d) {
   assign(paste0("temp", j), rcvresults[ ,2*j] - rcvresults[ ,2*(j-1)])
   assign(paste0("temp", j), as.integer(na.omit(get(paste0("temp", j)))))
 }
- source <- c((f+2):(2*f +1), rep((f-1), (f-1)), rep(...), f+2, f+3, 2*f +1, 2*f +2)
- target <- c(1:f, 1:(f-1-j), f+1, ..., 2*f +2, 2*f +2, 2*f +2, f-1)
+ source <- c((f+2):(2*f +1), rep((f-1), (f-1)), rep(...), rep(3, 3), f+2, f+3, 2*f +1, 2*f +2)
+ target <- c(1:f, 1:(f-1-j), f+1, ..., 1, 2, f+1, 2*f +2, 2*f +2, 2*f +2, f-1)
  value <- c()
  name <- c("voters", unique(rcvresults$candidate), "Exhausted", unique(rcvresults$candidate), ".")
   sankey_d1_values <- data.frame(source, target, value)
