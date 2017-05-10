@@ -63,12 +63,15 @@ rm(rcvcolnames)
 rm(temprcvround)
 
 ## Function that returns a dataframe given a properly formatted ballot image and a selected contest
-## example: mayor.election <- rcv_results(rcvimage = UsefulImage, rcvcontest = "Mayor - Berkeley (RCV)")
+## example: mayor.election <- rcv_results(rcvimage = FinalImage, rcvcontest = "Mayor - Berkeley (RCV)")
 
 rcv_results <- function(rcvimage, rcvcontest) {
+  
+  UsefulImage <- rcvimage %>%
+    select(pref_voter_id, contest, vote_rank, candidate, precinct)
 
   assign(paste0("Election: ", rcvcontest),
-         rcvimage %>%
+         UsefulImage %>%
            filter(contest == rcvcontest))
   
   assign("round0", data.frame(unique(get(paste0("Election: ", rcvcontest))['candidate'])))
