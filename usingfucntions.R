@@ -1,7 +1,7 @@
 mayorballotimage <- tidy_ballotimage(rawimage = "http://www.acgov.org/rov/rcv/results/230/BerkeleyMayor/ballot_image.txt", 
                                      masterkey = "http://www.acgov.org/rov/rcv/results/230/BerkeleyMayor/master_lookup.txt")
 
-nicmayorimage <- mayorballotimage %>% 
+nicemayorimage <- mayorballotimage %>% 
   spread(key = vote_rank, value = candidate)
 
 mayorelectionresults <- rcv_results(rcvimage = mayorballotimage, rcvcontest = "Mayor - Berkeley (RCV)")

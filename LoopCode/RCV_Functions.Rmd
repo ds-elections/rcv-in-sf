@@ -84,6 +84,13 @@ FinalImage <- BallotImage %>%
 
 BallotImage <- BallotImage %>%
   select(pref_voter_id, contest, vote_rank, candidate, precinct)
+dummyballot <- BallotImage %>%
+  group_by(pref_voter_id) %>%
+  filter(vote_rank == min(vote_rank)) %>%
+  ungroup()
+dummyballot$vote_rank <- '4'
+dummyballot$candidate <- NA
+BallotImage <- rbind(BallotImage, dummyballot)
 
 return(BallotImage)
 }
