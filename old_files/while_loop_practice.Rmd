@@ -1,0 +1,130 @@
+---
+title: "while_loop_practice"
+author: "Matthew Yancheff"
+date: "April 13, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(forcats)
+```
+
+```{r}
+for (year in c(2010,2011,2012,2013,2014,2015)){
+  print(paste("The year is", year))
+}
+```
+
+```{r}
+ # Create a vector filled with random normal values
+u1 <- rnorm(30)
+print("This loop calculates the square of the first 10 elements of vector u1")
+
+# Initialize `usq`
+usq <- 0
+
+for(i in 1:10) {
+  # i-th element of `u1` squared into `i`-th position of `usq`
+  usq[i] <- u1[i]*u1[i]
+  print(usq[i])
+}
+
+print(i)
+```
+
+```{r}
+assign(paste("orca",i,sep=""), list_name[[i]])
+```
+
+```{r}
+
+for(i in 1:10) {
+  assign(paste0('round', i), x[i])
+}
+```
+
+```{r}
+round_list <- list(data.frame = for(i in 1:10) {
+  assign(paste0('round', i), x[i])
+})
+paste(paste("round", i+1), total)
+```
+
+```{r}
+while (((nrow(get(paste0("loser", i)))) + 2) < nrow(round1))
+```
+
+```{r}
+round1 <- District1 %>%
+  group_by(pref_voter_id) %>%
+  filter(vote_rank == min(vote_rank)) %>%
+  ungroup() %>%
+  group_by(candidate) %>%
+  summarise(total = n()) %>%
+  mutate(prop = total/sum(total)) %>%
+  arrange(desc(total))
+loser1 <- round1 %>% 
+  arrange(total) %>%
+  filter(!is.na(candidate)) %>%
+  head(n = 1) %>%
+  select(candidate)
+```
+
+
+```{r}
+round0 <- data.frame(unique(District1$candidate))
+loser0 <- data.frame(candidate = character())
+a <- (nrow(round0) - 2)
+for (i in 0:a) {
+  assign(
+    paste0("round", i+1), 
+      District1 %>%
+      filter(!(candidate %in% get(paste0("loser", i))[['candidate']])) %>%
+      group_by(pref_voter_id) %>%
+      filter(vote_rank == min(vote_rank)) %>% 
+      ungroup() %>%
+      group_by(candidate) %>%
+      summarise(total = n()) %>%
+      mutate(proportion = total/sum(total)) %>%
+      arrange(desc(total)))
+  assign(
+    paste("loser", i+1), 
+      get(paste0("round", i+1)) %>% 
+      arrange(total) %>%
+      filter(!is.na(candidate)) %>%
+      head(n = 1) %>%
+      select(candidate) %>%
+      rbind(get(paste0("loser", i))))
+  assign(
+    get(paste0("round", i+1)),
+      right_join(get(paste0("round", i+1)),
+      get(paste0("round", i)), 
+      by = "candidate"))
+}
+```
+
+```{r}
+ v <- c(get(paste0("loser", i))[['candidate']])
+  paste0("round", i+1) <- District1 %>%
+    filter(!(candidate %in% "v")) %>%
+    group_by(pref_voter_id) %>%
+    filter(vote_rank == min(vote_rank)) %>% 
+    ungroup() %>%
+    group_by(candidate) %>%
+    summarise(total = n()) %>%
+    mutate(proportion = total/sum(total)) %>%
+    arrange(desc(total))
+  paste("loser", i+1) <-  get(paste0("round", i+1)) %>% 
+    arrange(total) %>%
+    filter(!is.na(candidate)) %>%
+    head(n = 1) %>%
+    select(candidate) %>%
+    rbind(get(paste0("loser", i)))
+  get(paste0("round", i+1)) <- right_join(get(paste0("round", i+1)),
+                                          get(paste0("round", i)), 
+                                          by = "candidate")
+  i <- i+1
+```
+
