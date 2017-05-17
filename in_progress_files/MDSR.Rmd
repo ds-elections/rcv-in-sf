@@ -1,0 +1,24 @@
+---
+title: "MDSR"
+author: "Jay Lee"
+date: "May 17, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Context
+
+Many electoral systems around the world use first-past-the-post voting, in which voters get to choose one preferred candidate from a list. When counting ballots, the candidate with the most votes wins, regardless of if they have a majority (>50%, most of the votes) or merely a plurality (the most votes, but not necessarily most of the votes).
+
+One alternative to this system is a method called Ranked Choice Voting. Rather than selecting one preferred candidate from a list, voters can rank some number of candidates from the list in order of their preference. For example, Pat might rank the candidates in the order `B,C,A` instead of merely marking B as their top choice.
+
+When counting ballots, the system creates a series of "rounds" until one candidate has a clear majority. In the first round, each voter's first choice is counted, then the candidate with the fewest votes is removed from competition. Voters who listed that candidate first then have their votes counted for their second choice. This process continues, removing candidates and counting the highest vote left for each voter until one candidate receives 50% of the total votes.
+
+In the case of Pat, say the first round results in candidate C in first, A in second, and B in third. When B is removed, Pat's vote transfers to candidate C, whom they listed second. Then, if C or A has over 50% of the vote (which with two candidates has to happen), that candidate wins the election.
+
+### Exercises
+
+### Solutions
