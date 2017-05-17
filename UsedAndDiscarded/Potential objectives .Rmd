@@ -1,0 +1,19 @@
+Potential Objectives 
+1. Can you wrangle the data? Get this out on the repo for people to look at
+  -Early parsing completed. 
+  -Next steps, maybe new variables including data relating to Condorcet winners   
+   
+a. Can you reproduce the election results? 
+  -Shiny app for sliding totals over time
+
+2. Visualize. Different levels of complexity by area? income? which city you're in? Number of candidates? campaign spending?
+  -Maybe map visualizations? Sliders would be cool here, but perhaps a little ambitious  
+
+
+Things to consider: what predicts future runs by candidates? Their initial amount of votes? Their initial ranking? Their final ranking? Focused support among one group or area?
+  -We're going to need outside research here. 
+
+See if Condorcet winner matches the RCV winner. Other types of elections also?
+-See the paper (posted on 4/7) in the Slack thread 
+
+Quantifying influences 
