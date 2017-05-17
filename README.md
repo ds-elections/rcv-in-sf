@@ -10,11 +10,11 @@ Our output from this project is mainly a program that takes in a "California sty
 
 **Contributors**
 
-Jay Lee
+Jay Lee – jaylee@reed.edu
 
-Mia Leung 
+Mia Leung – mialeung@reed.edu
 
-Matthew Yancheff
+Matthew Yancheff – yanchefm@reed.edu
 
 Profs. Andrew Bray & Paul Gronke, Case Studies: Statistical Analysis
 
