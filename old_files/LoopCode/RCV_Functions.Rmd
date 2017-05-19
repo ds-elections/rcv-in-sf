@@ -153,45 +153,32 @@ rcv_results <- function(rcvimage, rcvcontest) {
 ```
 
 ```{r}
-## THIS ONE DOESN'T WORK
-
 rcv_sankey_plot <- function(rcvresults) {
   f <- length(unique(rcvresults$candidate))
+if (f > 3) {
   d <- (ncol(rcvresults) - 1)/2
   temp1 <- rcvresults$round1total
+  source <- c((f+2):(2*f +1))
+  target <- c(1:f)
+  value <- c(temp1)
+for (j in 0:(f-4)) {source <- append(source, rep((f-1-j), (f-1-j)))}
+  source <- append(source, c(f+2, f+3, 2*f+1, 2*f+2))
+for(j in 1:(f-3)){target <- append(target, c(1:(f-1-j), f+1))}
+  target <- append(target, c(2*f +2, 2*f +2, 2*f +2, f-1))
 for (j in 2:d) {
   assign(paste0("temp", j), rcvresults[ ,2*j] - rcvresults[ ,2*(j-1)])
   assign(paste0("temp", j), as.integer(na.omit(get(paste0("temp", j)))))
+  value <- append(value, get(paste0("temp", j)))
 }
- source <- c((f+2):(2*f +1), rep((f-1), (f-1)), rep(...), rep(3, 3), f+2, f+3, 2*f +1, 2*f +2)
- target <- c(1:f, 1:(f-1-j), f+1, ..., 1, 2, f+1, 2*f +2, 2*f +2, 2*f +2, f-1)
- value <- c()
+ value <- append(value, c(0, 0, 0, 0))
  name <- c("voters", unique(rcvresults$candidate), "Exhausted", unique(rcvresults$candidate), ".")
   sankey_d1_values <- data.frame(source, target, value)
   sankey_d1_nodes <- data.frame(name)
   sankeyplot <- sankeyNetwork(Links = sankey_d1_values, Nodes = sankey_d1_nodes, Source = "source", Target = "target", Value = "value", NodeID = "name", units = "voters", fontSize = 12, nodeWidth = 20)
   return(sankeyplot) 
 }
-```
-
-
-```{r}
-## This is what the code above would generate if I could get it to work
-## An issue that comes up is that exhausted votes where the voter ranked all 3 spots on the ballot are not accounted for
-
-f <- 6
-d <- (ncol(district7results) - 1)/2
-temp1 <- district7results$round1total
-for (j in 2:d) {
-  assign(paste0("temp", j), district7results[ ,2*j] - district7results[ ,2*(j-1)])
-  assign(paste0("temp", j), as.integer(na.omit(get(paste0("temp", j)))))
+else {return(print("Too few candidates to create plot."))}
 }
-source <- c(8, 9, 10, 11, 12, 13, 5, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 8, 9, 13, 14)
-target <- c(1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 7, 1, 2, 3, 7, 1, 2, 7, 14, 14, 14, 5)
-value <- c(temp1, temp2, temp3, temp4, 0, 0, 0, 0)
-name <- c("voters", unique(district7results$candidate), "Exhausted", unique(district7results$candidate), ".")
-  sankey_d1_values <- data.frame(source, target, value)
-  sankey_d1_nodes <- data.frame(name)
-  sankeyplot <- sankeyNetwork(Links = sankey_d1_values, Nodes = sankey_d1_nodes, Source = "source", Target = "target", Value = "value", NodeID = "name", units = "voters", fontSize = 12, nodeWidth = 20)
 ```
+
 
