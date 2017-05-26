@@ -19,4 +19,4 @@ set4 <- read_xls("/Users/mialeung/Dropbox/*Reed/Spring 2017/MATH 241:POL 341/rcv
 set5 <- read_xls("/Users/mialeung/Dropbox/*Reed/Spring 2017/MATH 241:POL 341/rcv-in-sf/data/Census/ACS_15_5YR_S1902_5.xls")
 set6 <- read_xls("/Users/mialeung/Dropbox/*Reed/Spring 2017/MATH 241:POL 341/rcv-in-sf/data/Census/ACS_15_5YR_S1902.xls")
 
-
+#emily's for loop work with chester 
